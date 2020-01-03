@@ -11,7 +11,8 @@ GraphNode::~GraphNode()
     //// STUDENT CODE
     ////
 
-    delete _chatBot; 
+    //delete _chatBot; // _chatBot is not created by Graphnode but by chatlogic
+    // and should therefore also not be deleted here.
 
     ////
     //// EOF STUDENT CODE
