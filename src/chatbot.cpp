@@ -45,6 +45,93 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ////
 
+// copy constructor
+ChatBot::ChatBot(const ChatBot& source)
+{
+    std::cout << "begin: ChatBot copy constructor" << std::endl;
+    _chatLogic   = source._chatLogic;
+    _rootNode    = source._rootNode;
+    _currentNode = source._currentNode;
+
+    // create new image on heap 
+    _image = new wxBitmap(*(source._image));
+
+    std::cout << "end:   ChatBot copy constructor" << std::endl;
+}
+
+// copy assignment operator
+ChatBot& ChatBot::operator=(const ChatBot& source)
+{
+    std::cout << "begin: ChatBot copy assignment operator" << std::endl;
+    
+    // check self assignment
+    if (this == &source)
+    {
+        return *this;
+    }
+  
+    _chatLogic   = source._chatLogic;
+    _rootNode    = source._rootNode;
+    _currentNode = source._currentNode;
+
+    if (NULL != _image)
+        delete _image;
+
+    // create new image on heap
+    _image = new wxBitmap(*(source._image));
+
+    std::cout << "end:   ChatBot copy assignment operator" << std::endl;  
+    return *this;
+}
+
+
+
+// move constructor
+ChatBot::ChatBot(ChatBot&& source)
+{
+    std::cout << "begin: ChatBot move constructor" << std::endl;
+
+    _chatLogic   = source._chatLogic;
+    _rootNode    = source._rootNode;
+    _currentNode = source._currentNode; 
+    _image       = source._image;
+ 
+    source._chatLogic   = nullptr;
+    source._rootNode    = nullptr;
+    source._currentNode = nullptr;
+    source._image       = NULL;
+    std::cout << "end:   ChatBot move constructor" << std::endl;
+}
+
+
+
+// move assignment operator
+ChatBot& ChatBot::operator=(ChatBot&& source)
+{
+    std::cout << "begin: ChatBot Move Assign operator" << std::endl;
+    
+    // check self-assignment
+    if (this == &source)
+        return *this;
+
+    _chatLogic   = source._chatLogic;
+    _rootNode    = source._rootNode;
+    _currentNode = source._currentNode;
+    _image       = source._image;
+
+    source._chatLogic   = nullptr;
+    source._rootNode    = nullptr;
+    source._currentNode = nullptr;
+    source._image       = NULL;
+
+    std::cout << "end:   ChatBot Move Assign operator" << std::endl;
+    return *this;
+}
+
+
+
+
+
 ////
 //// EOF STUDENT CODE
 
